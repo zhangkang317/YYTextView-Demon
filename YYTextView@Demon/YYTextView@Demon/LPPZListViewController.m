@@ -62,6 +62,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [self.navigationController popViewControllerAnimated:YES];
     !self.didSelectBlock ?:self.didSelectBlock(@"[@张三-123123]");
     
 }
