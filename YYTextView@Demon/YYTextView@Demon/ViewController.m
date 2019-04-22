@@ -40,8 +40,33 @@ metamacro_foreach_cxt(rac_weakify_,, __weak, __VA_ARGS__)
     [btn addTarget:self action:@selector(btnOnclicK:) forControlEvents:  UIControlEventTouchUpInside];
     btn.frame = CGRectMake(100, 200, 100, 100);
     [self.view addSubview:btn];
+    
+    
+    UIButton * logBtn = [[UIButton alloc] init];
+    [logBtn setTitle:@"打印出数据" forState:UIControlStateNormal];
+    [logBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [logBtn addTarget:self action:@selector(logBtnclicK) forControlEvents:  UIControlEventTouchUpInside];
+    logBtn.frame = CGRectMake(100, 250, 100, 100);
+    [self.view addSubview:logBtn];
 }
 
+-(void)logBtnclicK{
+    [self.textView.attributedText enumerateAttribute:YYTextAttachmentAttributeName
+                                             inRange:NSMakeRange(0, self.textView.attributedText.string.length)
+                                             options:0
+                                          usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                              if ([value isKindOfClass: [YYTextAttachment class]]) {
+                                                  YYTextAttachment * attachMent = (YYTextAttachment *)value;
+                                                  if (attachMent.userInfo != nil) {
+                                                      for (NSString * key in attachMent.userInfo) {
+                                                          NSLog(@"key:%@",attachMent.userInfo[key]);
+
+                                                      }
+                                                  }
+                                              }
+                                          }];
+
+}
 -(void)btnOnclicK:(UIButton *)sender{
     LPPZListViewController * vc = [[LPPZListViewController alloc] init];
     vc.didSelectBlock = ^(NSString *name) {

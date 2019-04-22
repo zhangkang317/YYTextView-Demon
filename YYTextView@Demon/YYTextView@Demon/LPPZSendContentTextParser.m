@@ -66,6 +66,7 @@
             if (NULLString(userId)) {
                 continue;
             }
+            //将正则匹配到的文字转化为图片
             LPPZLabelImage * image = [LPPZLabelImage imageWithText:emoString
                                                               font:_atUserFont
                                                          textColor:HEXRGBCOLOR(0x0068b7)
